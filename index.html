@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubham's Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#0d0d0d;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* PARTICLES */
+#particles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:#0d0d0d;
+    z-index:-1;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    z-index:1000;
+}
+nav a{
+    margin:0 15px;
+    color:#fff;
+    font-weight:500;
+    text-decoration:none;
+    transition:0.3s;
+}
+nav a:hover{
+    color:#FEBA01;
+}
+
+/* HERO */
+.hero{
+    padding-top:150px;
+    text-align:center;
+}
+.hero h1{
+    font-size:55px;
+}
+.hero p{
+    font-size:20px;
+    color:#bbbbbb;
+}
+.typing{
+    color:#FEBA01;
+    border-right:3px solid #FEBA01;
+    animation:blink .7s infinite;
+}
+@keyframes blink{
+    0%,100%{border-color:transparent;}
+    50%{border-color:#FEBA01;}
+}
+.hero button{
+    margin-top:20px;
+    padding:12px 25px;
+    background:#FEBA01;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* SECTION CARDS */
+.glass-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border-radius:15px;
+    padding:30px;
+    margin:40px auto;
+    max-width:1200px;
+    box-shadow:0 10px 30px rgba(255,255,255,0.1);
+}
+
+/* EXPERIENCE CARD */
+.exp-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+.exp-title{
+    color:#FEBA01;
+    font-size:20px;
+}
+.exp-company{
+    font-weight:600;
+    margin:5px 0;
+}
+.exp-year{
+    font-size:14px;
+    opacity:0.7;
+}
+
+/* PROJECT CARDS */
+.project-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+.project-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border-radius:15px;
+    padding:20px;
+    transform-style:preserve-3d;
+    transition:0.3s;
+}
+.project-card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+}
+.project-card:hover{
+    transform:rotateY(8deg) rotateX(8deg);
+}
+
+/* SKILLS CARDS */
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:20px;
+}
+.skill-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    font-weight:600;
+    box-shadow:0 5px 15px rgba(255,255,255,0.05);
+}
+
+/* CONTACT FORM */
+form{
+    max-width:500px;
+    margin:auto;
+}
+input,textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    background:rgba(255,255,255,0.08);
+    border:none;
+    color:white;
+    border-radius:10px;
+}
+form button{
+    width:100%;
+    padding:12px;
+    background:#FEBA01;
+    border:none;
+    border-radius:10px;
+}
+footer{
+    padding:20px;
+    text-align:center;
+    background:#111;
+}
+/* SUCCESS POPUP */
+#successPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 15px;
+    color: #00ff88;
+    font-size: 22px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease;
+}
+
+#successPopup.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+    <h2>Shubham.</h2>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a href="assets/Shubham's___Resume.pdf" download>Resume</a>
+    </nav>
+</header>
+
+<!-- ABOUT / HERO -->
+<div class="hero glass-card" id="about" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:40px;">
+    
+    <!-- Profile Image -->
+    <div style="flex-shrink:0;">
+        <img src="assets/prof.jpg" alt="shubham" 
+             style="width:150px; height:150px; border-radius:50%; object-fit:cover; border:3px solid rgba(255,255,255,0.3); box-shadow:0 5px 20px rgba(255,255,255,0.2);">
+    </div>
+
+    <!-- Hero Text -->
+    <div style="max-width:600px; text-align:center;">
+        <h1>Hello, I'm Shubham Sunil Patil 👋</h1>
+        <p>I am a <span class="typing"></span></p>
+        <button onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+    </div>
+
+</div>
+
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="glass-card">
+        <h2>Experience</h2>
+        <div class="exp-card">
+            <div class="exp-title">Digital Reservations Administrator</div>
+            <div class="exp-company">KM GROUP LIMITED</div>
+            <div class="exp-year">February 2025 – Dec 2025</div>
+            <ul>
+                <li>Manage digital reservation systems and streamline booking processes.</li>
+                <li>Collaborated with cross-functional teams to enhance user experience.</li>
+            </ul>
+        </div>
+        <div class="exp-card">
+            <div class="exp-title">Web Developer</div>
+            <div class="exp-company">Brototype</div>
+            <div class="exp-year">August 2023 – October 2024</div>
+            <ul>
+                <li>Developed full-stack web applications using MongoDB, Express.js, Node.js, etc.</li>
+                <li>Built RESTful APIs and integrated third-party services.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->       
+<section id="projects">
+    <div class="glass-card">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card" data-tilt>
+                <img src="/assets/iwear.png" alt="">
+                <h3>E-commerce Management System</h3>
+                <p>Node.js + Express.js + MongoDB + EJS</p>
+            </div>
+            <div class="project-card" data-tilt>
+                <img src="assets/ez.png" alt="">
+                <h3>EV Charging station</h3>
+                <p>Node.js + Express.js + MongoDB + React</p>
+            </div>
+            <div class="project-card" data-tilt>
+                <img src="assets/dealsDray.png" alt="">
+                <h3>Employer's Management Website</h3>
+                <p>Node.js + Express.js + MongoDB + React</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="glass-card">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">HTML5</div>
+            <div class="skill-card">CSS3</div>
+            <div class="skill-card">JavaScript</div>
+            <div class="skill-card">Node.js</div>
+            <div class="skill-card">Express.js</div>
+            <div class="skill-card">Bootstrap</div>
+            <div class="skill-card">Figma</div>
+            <div class="skill-card">ReactJS</div>
+            <div class="skill-card">SQL</div>
+            <div class="skill-card">MongoDB</div>
+            <div class="skill-card">Firebase</div>
+            <div class="skill-card">Git</div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="glass-card">
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" rows="5" placeholder="Message..." required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    © 2024 shubham — All Rights Reserved.
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+var typed = new Typed('.typing', {
+    strings:["Web Developer","Problem Solver"],
+    typeSpeed:80,
+    backSpeed:60,
+    loop:true
+});
+
+/* Particles */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+let particles=[];
+for(let i=0;i<80;i++){
+    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2,speedX:(Math.random()*0.5)-0.25,speedY:(Math.random()*0.5)-0.25});
+}
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+        ctx.fillStyle="rgba(255,255,255,0.6)";
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+        p.x+=p.speedX;
+        p.y+=p.speedY;
+        if(p.x<0||p.x>canvas.width) p.speedX*=-1;
+        if(p.y<0||p.y>canvas.height) p.speedY*=-1;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+
+/* EmailJS */
+/* EmailJS */
+/* EmailJS */
+emailjs.init("FEduFyovSfYnGDyNX");  // your public key
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.send("service_vvs3nst", "template_cgfy6to", {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    })
+        .then(() => {
+            showSuccessPopup();
+            document.getElementById("contactForm").reset();
+        })
+        .catch((err) => {
+            console.error("Email send error:", err);
+            alert("Failed to send message. Please try again.");
+        });
+});
+
+/* POPUP FUNCTION */
+function showSuccessPopup() {
+    const popup = document.getElementById("successPopup");
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 2000);
+}
+
+
+</script>
+<div id="successPopup">
+  <div class="popup-content">
+    ✓ Message Sent Successfully!
+  </div>
+</div>
+
+
+</body>
+</html>
